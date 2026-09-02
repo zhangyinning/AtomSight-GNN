@@ -187,7 +187,7 @@ class AtomSightGNN(nn.Module):
         )
 
         # -- CGCNN backbone (unchanged) -------------------------------------
-        # self.embedding           = nn.Linear(orig_atom_fea_len, atom_fea_len)
+        self.embedding           = nn.Linear(orig_atom_fea_len, atom_fea_len)
         self.convs               = nn.ModuleList([
             ConvLayer(atom_fea_len=orig_atom_fea_len, nbr_fea_len=nbr_fea_len)
             for _ in range(n_conv)
@@ -229,7 +229,7 @@ class AtomSightGNN(nn.Module):
         atom_fea = self.attention(atom_fea)         # [N, F]
 
         # -- CGCNN pipeline -------------------------------------------------
-        # atom_fea = self.embedding(atom_fea)         # [N, atom_fea_len]
+        atom_fea = self.embedding(atom_fea)         # [N, atom_fea_len]
         for conv in self.convs:
             atom_fea = conv(atom_fea, nbr_fea, nbr_fea_idx)
 

@@ -1,14 +1,14 @@
-# GitHub Repository for "AtomSight-GNN: A Global Attention Layer for Interpreting Atomic Feature Importance in Materials Property Prediction"
+# GitHub Repository for "AtomSight-GNN: a global feature-attention layer that extracts reproducible, property-specific chemical drivers from crystal graph neural networks"
  
 ## Introduction
  
 This repository accompanies the paper:
  
-**Yinning Zhang, "AtomSight-GNN: A Global Attention Layer for Interpreting Atomic Feature Importance in Materials Property Prediction," (2026)**.
+**Yinning Z., et al., "AtomSight-GNN: a global feature-attention layer that extracts reproducible, property-specific chemical drivers from crystal graph neural networks" (2026)**.
  
-It contains the source code and data pipeline for **AtomSight-GNN**, which integrates a global feature-dimension attention layer — the Crystal Elemental Attention Layer (CEAL) — into crystal graph neural networks. CEAL learns task-specific atomic property importance rankings during end-to-end training, producing directly readable feature importance scores at no additional inference cost.
+It contains the source code and data pipeline for **AtomSight-GNN**, which integrates a global feature-dimension attention layer into crystal graph neural networks. AtomSight-GNN learns task-specific atomic property importance rankings during end-to-end training, producing directly readable feature importance scores at no additional inference cost.
  
-AtomSight-GNN is validated on two backbone architectures — **OxiGraphX** (PNA-based aggregation with learnable MLP weights) and **CGCNN** (weighted sum aggregation with Gaussian bond-distance edge features) — and evaluated on formation energy and band gap prediction using crystal structures from the Materials Project database.
+AtomSight-GNN is validated on two backbone architectures, **OxiGraphX** (PNA-based aggregation with learnable MLP weights) and **CGCNN** (weighted sum aggregation with Gaussian bond-distance edge features). It was evaluated on formation energy and band gap prediction using crystal structures from the Materials Project database.
  
 ## Repository Overview
  
@@ -23,7 +23,7 @@ AtomSight-GNN/
 │   └── cif_files/              ← CIF files (downloaded separately)
 │
 ├── oxigraphx/                  ← OxiGraphX backbone
-│   ├── main_new.py             ← training entry point
+│   ├── main.py             ← training entry point
 │   ├── train.py                ← training loop
 │   ├── pred.py                 ← inference on new structures
 │   ├── config.py               ← dataset paths and hyperparameters

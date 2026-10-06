@@ -43,46 +43,48 @@ AtomSight-GNN/
  
 ## Data Preparation
  
-**Step 1 — Fetch properties from Materials Project**
+** Step 1 (Optional) — Fetch the most current list of  from Materials Project**
  
-Edit `data/query_mp.py` with your Materials Project API key, then run:
+If you want to download the most current list of stable structures with formation energy and bandgap properties, Edit `data/query_mp.py` with your Materials Project API key, then run:
  
 ```bash
 cd data
 python query_mp.py
 ```
- 
-This generates `id_prop.csv` with structure IDs and formation energy / band gap values.
- 
+This generates `id_prop.csv` with structure IDs and formation energy values.
+
+However, if you want to reproduce our experiment and just use the list we used in the experiment, you can skip Step 1, just use the file 'id_prop.csv' under the folder data. 
+
 **Step 2 — Download CIF files**
  
 ```bash
 python download_cifs.py
 ```
  
-This downloads all 33,973 CIF files into `data/cif_files/`. This may take a while.
+This downloads all 33,973 CIF files into `data/cif_files/`. 
  
 **Step 3 — Generate atom features (optional)**
- 
-`atom_init_new.json` is already included in the repository. Only run this if you modify the feature encoding:
  
 ```bash
 python generate_atom_init.py
 ```
+This will generate the atom feature encoding file `atom_init_new.json`. However, this file is already included in the repository. You only run this code if you want modify the feature encoding:
+ 
  
 ## Environmental Requirements
- 
+
 ```bash
-pip install -r requirements.txt
+conda env create -f env.yaml
+conda activate atomsight
 ```
- 
+
 Key packages: `torch`, `torch-geometric`, `pymatgen`, `scikit-learn`, `pandas`, `matplotlib`
  
 ## Training the Model
  
 **OxiGraphX backbone:**
  
-Edit `oxigraphx/config.py` to set the target property (`formation_energy_ev` or `band_gap`), then:
+Edit `oxigraphx/config.py` to select structure list `id_prop.csv`(formation energy, 33,973 CIF structures) or `bandgap.csv` (band gap, 17,089), and select the target property matching to the column name on the .csv file (`formation_energy_ev` or `band_gap`), then:
  
 ```bash
 cd oxigraphx
@@ -93,7 +95,7 @@ python main_new.py
  
 ```bash
 cd cgcnn
-python main.py data/ --optim Adam
+python main.py data
 ```
  
 Results are saved with timestamped filenames including:
@@ -102,7 +104,9 @@ Results are saved with timestamped filenames including:
 - `_training_progress.txt` — epoch-by-epoch train/val/test losses
 - `_y.txt` — test set predictions vs. targets
 - `.pth` — model checkpoint
-## Performing Predictions
+
+
+## Predictions
  
 **OxiGraphX:**
  

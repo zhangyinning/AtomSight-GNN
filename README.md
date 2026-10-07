@@ -8,7 +8,7 @@ This repository accompanies the paper:
  
 It contains the source code and data pipeline for **AtomSight-GNN**, which integrates a global feature-dimension attention layer into crystal graph neural networks. AtomSight-GNN learns task-specific atomic property importance rankings during end-to-end training, producing directly readable feature importance scores at no additional inference cost.
  
-AtomSight-GNN is validated on two backbone architectures, **OxiGraphX** (PNA-based aggregation with learnable MLP weights) and **CGCNN** (weighted sum aggregation with Gaussian bond-distance edge features). It was evaluated on formation energy and band gap prediction using crystal structures from the Materials Project database.
+AtomSight-GNN is validated on two backbone architectures, **OxiGraphX** (PNA-based aggregation with learnable MLP weights) and **CGCNN** (weighted sum aggregation with Gaussian bond-distance edge features). Combined with two backbone architectures, AtomSight-GNN predicts formation energies (Ef) across 33,973 inorganic crystals accurately while yielding feature rankings that are highly reproducible across independent training runs (cross-seed Spearman ρ = 0.84 ± 0.06 and 0.87 ± 0.04, respectively). 
  
 ## Repository Overview
  

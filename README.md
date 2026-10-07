@@ -88,7 +88,7 @@ Edit `oxigraphx/config.py` to select structure list `id_prop.csv`(formation ener
  
 ```bash
 cd oxigraphx
-python main_new.py
+python main.py
 ```
  
 **CGCNN backbone:**
@@ -102,20 +102,24 @@ Results are saved with timestamped filenames including:
 - `_feature_importance.csv` — CEAL attention weight rankings for all 40 features
 - `_feature_importance.png` — top-20 feature importance bar chart
 - `_training_progress.txt` — epoch-by-epoch train/val/test losses
+- `_progress_plotting.png` - training progress plot with epoch-by-epoch train/val losses
 - `_y.txt` — test set predictions vs. targets
+- `_y.txt.png` — regression plot of test set predictions vs. targets
 - `.pth` — model checkpoint
-
+- `_MAE.txt` a summary of all MAEs from the run.
 
 ## Predictions
  
 **OxiGraphX:**
  
-Edit `CHECKPOINT` and `DATA_PATH` at the top of `oxigraphx/pred.py`, then:
+Edit `CHECKPOINT` and `DATA_PATH` in `oxigraphx/pred.py`, Edit `oxigraphx/config.py`, then:
  
 ```bash
 python pred.py
 ```
- 
+
+The cif files for the three experimental crystals are stored in `oxigraphx/data/pred_data`.
+
 **CGCNN:**
  
 ```bash
@@ -127,15 +131,6 @@ Example:
 python predict.py 08_14/model_best_20260814_180852.pth.tar pred_data/
 ```
  
-## Key Results
- 
-| Configuration | Cross-seed Spearman ρ |
-|---|---|
-| CGCNN + SGD (92-feat) | 0.598 ± 0.064 |
-| CGCNN + Adam (92-feat) | 0.793 ± 0.056 |
-| CGCNN + Adam (40-feat) | 0.868 ± 0.039 |
-| OxiGraphX + Adam (40-feat) | 0.840 ± 0.060 |
-| PNA + Adam (40-feat) | 0.910 ± 0.055 |
  
 ## Citation
  
@@ -143,8 +138,8 @@ If you use this code for your research, please cite our paper:
  
 ```
 @article{zhang2026atomsight,
-  author={Zhang, Yinning},
-  title={AtomSight-GNN: A Global Attention Layer for Interpreting Atomic Feature Importance in Materials Property Prediction},
+  author={Zhang, Yinning, et al.},
+  title={AtomSight-GNN: a global feature-attention layer that extracts reproducible, property-specific chemical drivers from crystal graph neural networks},
   year={2026}
 }
 ```
